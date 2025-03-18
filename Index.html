@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player de Música</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .player {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        select {
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🎵 Player de Música 🎵</h2>
+
+    <div class="player">
+        <select id="songList" onchange="changeSong()">
+            <!-- As opções serão inseridas via JavaScript -->
+        </select>
+        <br>
+        <audio id="audioPlayer" controls></audio>
+    </div>
+
+    <script>
+        // Lista de músicas hospedadas na pasta "musicas/"
+        const songs = [
+            { name: "Piano", url: "musicas/piano.mp3" },
+            { name: "APT", url: "musicas/apt.mp3" },
+            { name: "Baixo", url: "musicas/baixo.mp3" },
+            { name: "Trompete", url: "musicas/trompete.mp3" },
+            { name: "Saxofone", url: "musicas/saxofone.mp3" },
+            { name: "Bateria", url: "musicas/bateria.mp3" },
+            { name: "Pandeiro", url: "musicas/pandeiro.mp3" },
+            { name: "Violino", url: "musicas/violino.mp3" },
+            { name: "Sanfona", url: "musicas/sanfona.mp3" },
+            { name: "Chiclete", url: "musicas/chiclete.mp3" },
+            { name: "Guitarra", url: "musicas/guitarra.mp3" }
+        ];
+
+        const songList = document.getElementById("songList");
+        const audioPlayer = document.getElementById("audioPlayer");
+
+        // Adiciona as músicas ao dropdown
+        songs.forEach((song, index) => {
+            let option = document.createElement("option");
+            option.value = song.url;
+            option.textContent = song.name;
+            songList.appendChild(option);
+        });
+
+        // Função para trocar a música
+        function changeSong() {
+            audioPlayer.src = songList.value;
+            audioPlayer.play();
+        }
+
+        // Define a primeira música como padrão
+        audioPlayer.src = songs[0].url;
+    </script>
+
+</body>
+</html>
